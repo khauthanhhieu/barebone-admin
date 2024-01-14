@@ -19,7 +19,6 @@ const handle = app.getRequestHandler();
 app.prepare()
     .then(() => {
         const server = express();
-        console.log(server);
 
         var allowlist = [
             "http://localhost:3000",
