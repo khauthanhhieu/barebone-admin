@@ -1,4 +1,6 @@
 @import url("https://fonts.cdnfonts.com/css/satoshi");
+@import "./data-tables-css.css";
+@import "./satoshi.css";
 
 @tailwind base;
 @tailwind components;
