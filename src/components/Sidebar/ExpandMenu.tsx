@@ -48,7 +48,7 @@ const ExpandMenu = (props: Props) => {
             </div>
           </div>
         ) : (
-          <LinkItem title="Home" href="/dashboard" icon={icon}></LinkItem>
+          <LinkItem title="Home" href="/admin" icon={icon}></LinkItem>
         )}
       </CollapsibleTrigger>
       <CollapsibleContent className={s.CollapsibleContent}>

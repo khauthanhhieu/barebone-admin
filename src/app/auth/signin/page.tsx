@@ -13,12 +13,12 @@ const SignIn: FC = () => {
     const { push } = useRouter();
 
     if (status == "authenticated") {
-        push("/dashboard");
+        push("/admin");
     }
 
     const searchParams = useSearchParams();
 
-    const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+    const callbackUrl = searchParams.get("callbackUrl") || "/admin";
 
     const handleLogin = (provider: string) => {
         setLoading(true);
@@ -32,7 +32,7 @@ const SignIn: FC = () => {
                 <div className="flex flex-wrap items-center">
                     <div className="hidden w-full xl:block xl:w-1/2">
                         <div className="px-26 py-17.5 text-center">
-                            <Link className="mb-5.5 inline-block" href="/dashboard">
+                            <Link className="mb-5.5 inline-block" href="/admin">
                                 <h1 className="text-2xl font-semibold text-white">
                                     Shakib Admin
                                 </h1>

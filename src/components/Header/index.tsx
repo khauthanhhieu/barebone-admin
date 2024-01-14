@@ -26,7 +26,7 @@ const Header = () => {
           )}
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" href="/dashboard">
+          <Link className="block flex-shrink-0 lg:hidden" href="/admin">
             <Image
               width={32}
               height={32}
