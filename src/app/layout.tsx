@@ -1,7 +1,7 @@
 import "./globals.css";
 import "./data-tables-css.css";
 import "./satoshi.css";
-import SessionProvider from "~/components/Auth/SessionProvider"
+import SessionProvider from "~/components/Auth/SessionProvider";
 import { getServerSession } from "next-auth";
 
 export default async function RootLayout({

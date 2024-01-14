@@ -6,7 +6,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { UserService } from "~/server/service";
 import { User } from "~/server/models";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
     providers: [
         // https://www.balbooa.com/help/gridbox-documentation/integrations/other/google-client-id
         GoogleProvider({
@@ -59,8 +59,8 @@ export const authOptions: NextAuthOptions = {
             return baseUrl;
         },
     }
-};
+} as never;
 
-export const handler = NextAuth(authOptions);
+export const handler = NextAuth(authOptions) as never;
 
 export { handler as GET, handler as POST };
