@@ -1,11 +1,11 @@
 {
-  "name": "shakib-admin",
+  "name": "barebone-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "set NODE_ENV=production && node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "@types/node": "20.4.8",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "cross-env": "^7.0.3",
     "eslint": "8.46.0",
     "eslint-config-next": "latest",
     "postcss": "8.4.27",

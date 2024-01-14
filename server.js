@@ -36,7 +36,6 @@ app.prepare()
         };
 
         server.get("*", cors(corsOptionsDelegate), (req, res) => {
-            console.log(req, res);
             return handle(req, res);
         });
 
