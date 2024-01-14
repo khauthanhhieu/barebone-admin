@@ -3,7 +3,7 @@ const next = require("next");
 const cors = require("cors");
 
 const dev = process.env.NODE_ENV !== "production";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const app = next({
     dev,
@@ -21,8 +21,8 @@ app.prepare()
         const server = express();
 
         var allowlist = [
-            "http://localhost:3000",
-            "http://admin.localhost"
+            "http://localhost:3001",
+            "http://admin.localhost.com"
         ];
 
         var corsOptionsDelegate = function (req, callback) {
