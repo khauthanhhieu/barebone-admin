@@ -1,5 +1,4 @@
-import type { NextAuthOptions, Account, Profile } from "next-auth";
-
+import type { Account, Profile } from "next-auth";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -30,6 +29,26 @@ export const authOptions = {
     },
 
     callbacks: {
+        async jwt({ token }) {
+            let isAdmin = false;
+            if (token?.email) {
+                const user = await UserService.FindByEmail(token.email);
+                isAdmin = user?.isAdmin ?? false;
+            }
+            token.isAdmin = isAdmin;
+            return token;
+        },
+        // async session({ session } : { session: Session }) {
+        //     let isAdmin = false;
+        //     if (session?.user?.email) {
+        //         const user = await UserService.FindByEmail(session.user.email);
+        //         isAdmin = user?.isAdmin ?? false;
+        //     }
+
+        //     session.isAdmin = isAdmin;
+
+        //     return session;
+        // },
         async signIn({ account, profile }: { account: Account | null, profile: Profile }) {
             if (!account) {
                 return false;

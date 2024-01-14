@@ -13,12 +13,12 @@ const SignIn: FC = () => {
     const { push } = useRouter();
 
     if (status == "authenticated") {
-        push("/admin");
+        push("/");
     }
 
     const searchParams = useSearchParams();
 
-    const callbackUrl = searchParams.get("callbackUrl") || "/admin";
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
 
     const handleLogin = (provider: string) => {
         setLoading(true);
@@ -34,11 +34,11 @@ const SignIn: FC = () => {
                         <div className="px-26 py-17.5 text-center">
                             <Link className="mb-5.5 inline-block" href="/admin">
                                 <h1 className="text-2xl font-semibold text-white">
-                                    Shakib Admin
+                                    Barebone Admin
                                 </h1>
                                 <Image
                                     className="dark:hidden"
-                                    src={"/images/logo/logo-dark.svg"}
+                                    src="/images/logo/logo-dark.svg"
                                     alt="Logo"
                                     width={176}
                                     height={32}

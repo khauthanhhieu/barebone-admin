@@ -7,6 +7,10 @@ export const Create = async (data: User) => {
         });
 };
 
+export const FindByEmail = async (email: string) => {
+    return await User.findOne({ where: { email } });
+};
+
 export const FindOrCreate = async (data: User) => {
     try {
         const [user, _] = await User.findOrCreate({
@@ -16,7 +20,7 @@ export const FindOrCreate = async (data: User) => {
 
         return user;
     } catch (error) {
-        console.error("Error when find or create user: ", error);
+        // console.error("Error when find or create user: ", error);
         return null;
     }
 };

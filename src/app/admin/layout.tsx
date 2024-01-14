@@ -2,7 +2,7 @@ import Sidebar from "~/components/Sidebar/Sidebar";
 import Header from "~/components/Header";
 import "~/styles/admin/style.css";
 
-export default async function DashboardLayout({
+export default async function AdminLayout({
     children,
 }: {
     children: React.ReactNode;

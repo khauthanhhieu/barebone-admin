@@ -19,7 +19,13 @@ export default withAuth(
     {
         callbacks: {
             authorized: ({ req, token }) => {
-                return PublicPages.includes(req.nextUrl.pathname) || token !== null;
+                if (PublicPages.includes(req.nextUrl.pathname)) {
+                    return true;
+                }
+                if (req.nextUrl.pathname.startsWith("/admin")) {
+                    return token?.isAdmin === true;
+                }
+                return token != null;
             }
         }
     }
