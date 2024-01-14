@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownMessage from "./DropdownMessage";
@@ -7,10 +8,7 @@ import Image from "next/image";
 import { MenuIcon } from "lucide-react";
 import { useSidebar } from "~/components/Sidebar/use-sidebar";
 
-const Header = (props: {
-  sidebarOpen: string | boolean | undefined;
-  setSidebarOpen: (arg0: boolean) => void;
-}) => {
+const Header = () => {
   const { toggleSidebar, isSidebarOpen } = useSidebar((state) => state);
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -28,7 +26,7 @@ const Header = (props: {
           )}
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" href="/">
+          <Link className="block flex-shrink-0 lg:hidden" href="/dashboard">
             <Image
               width={32}
               height={32}

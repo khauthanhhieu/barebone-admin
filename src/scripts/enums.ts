@@ -1,0 +1,1 @@
+export const PublicPages = ["/auth/signin", "/auth/signup"];

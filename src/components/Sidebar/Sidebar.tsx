@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,9 +29,9 @@ import MenuItem from "./MenuItem";
 import LinkItem from "./LinkItem";
 import ExpandMenu from "./ExpandMenu";
 
-interface SidebarProps {}
+interface SidebarProps { }
 
-const Sidebar = ({}: SidebarProps) => {
+const Sidebar = ({ }: SidebarProps) => {
   const pathname = usePathname();
   const { isSidebarOpen, toggleSidebar } = useSidebar((state) => state);
 
@@ -45,7 +46,7 @@ const Sidebar = ({}: SidebarProps) => {
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="relative flex w-full items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <Link className="flex items-center" href="/">
+        <Link className="flex items-center" href="/dashboard">
           <Image
             className="h-6 w-6 rounded-md"
             width={400}
@@ -67,7 +68,7 @@ const Sidebar = ({}: SidebarProps) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="px-4 py-4  lg:px-6">
+        <nav className="px-4 py-4 lg:px-6 text-white">
           {/* <!-- Menu Group --> */}
           <div>
             <ul
@@ -84,7 +85,7 @@ const Sidebar = ({}: SidebarProps) => {
                   <LinkItem
                     icon={<ShoppingBag />}
                     title="E-commerce"
-                    href="/"
+                    href="/dashboard"
                   />
                 </ExpandMenu>
               </li>
@@ -94,7 +95,7 @@ const Sidebar = ({}: SidebarProps) => {
               <li>
                 <LinkItem
                   title="Calendar"
-                  href="/calendar"
+                  href="/dashboard/calendar"
                   icon={<Calendar className="h-6 w-6" />}
                 ></LinkItem>
               </li>
@@ -102,7 +103,7 @@ const Sidebar = ({}: SidebarProps) => {
               <li>
                 <LinkItem
                   title="Tables"
-                  href="/tables"
+                  href="/dashboard/tables"
                   icon={<Table2Icon className="h-6 w-6" />}
                 ></LinkItem>
               </li>
@@ -113,7 +114,7 @@ const Sidebar = ({}: SidebarProps) => {
               <li>
                 <LinkItem
                   title="Settings"
-                  href="/settings"
+                  href="/dashboard/settings"
                   icon={<Settings className="h-6 w-6" />}
                 ></LinkItem>
               </li>
@@ -122,7 +123,7 @@ const Sidebar = ({}: SidebarProps) => {
               <li>
                 <LinkItem
                   title="Profile"
-                  href="/profile"
+                  href="/dashboard/profile"
                   icon={<User2Icon className="h-6 w-6" />}
                 ></LinkItem>
               </li>
@@ -131,7 +132,7 @@ const Sidebar = ({}: SidebarProps) => {
               <li>
                 <LinkItem
                   title="Charts"
-                  href="/chart"
+                  href="/dashboard/chart"
                   icon={<BarChart2 className="h-6 w-6" />}
                 ></LinkItem>
               </li>
@@ -145,12 +146,12 @@ const Sidebar = ({}: SidebarProps) => {
                 <ExpandMenu icon={<Component className="h-6 w-6" />} name="UI">
                   <LinkItem
                     title="Alerts"
-                    href="/ui/alerts"
+                    href="/dashboard/ui/alerts"
                     icon={<AlertCircle className="h-5 w-5" />}
                   ></LinkItem>
                   <LinkItem
                     title="Buttons"
-                    href="/ui/buttons"
+                    href="/dashboard/ui/buttons"
                     icon={<MousePointerClick className="h-5 w-5" />}
                   />
                 </ExpandMenu>
