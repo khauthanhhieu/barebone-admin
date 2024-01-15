@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Settings Page | Next.js E-commerce Dashboard Template",
-  description: "This is Settings page for ShakibAdmin Next.js",
+  description: "This is Settings page for Barebone Admin Next.js",
   // other metadata
 };
 
