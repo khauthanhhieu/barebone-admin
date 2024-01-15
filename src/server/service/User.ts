@@ -20,7 +20,7 @@ export const FindOrCreate = async (data: User) => {
 
         return user;
     } catch (error) {
-        // console.error("Error when find or create user: ", error);
+        console.error("Error when find or create user: ", error);
         return null;
     }
 };
