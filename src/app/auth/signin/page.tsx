@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const SignIn: FC = () => {
     const [loading, setLoading] = useState(false);
@@ -16,14 +16,9 @@ const SignIn: FC = () => {
         push("/");
     }
 
-    const searchParams = useSearchParams();
-
-    const callbackUrl = searchParams.get("callbackUrl") || "/";
-
     const handleLogin = (provider: string) => {
         setLoading(true);
-        signIn(provider, { callbackUrl })
-            .finally(() => setLoading(false));
+        signIn(provider, { callbackUrl: "/" }).finally(() => setLoading(false));
     };
 
     return (

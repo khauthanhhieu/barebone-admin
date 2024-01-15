@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { UserService } from "~/server/service";
 import { User } from "~/server/models";
+import { JWT } from "next-auth/jwt";
 
 export const authOptions = {
     providers: [
@@ -29,7 +30,7 @@ export const authOptions = {
     },
 
     callbacks: {
-        async jwt({ token }) {
+        async jwt({ token }: { token: JWT }) {
             let isAdmin = false;
             if (token?.email) {
                 const user = await UserService.FindByEmail(token.email);

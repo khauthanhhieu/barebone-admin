@@ -3,7 +3,7 @@ import { User } from "../models";
 export const Create = async (data: User) => {
     return await User.create(data)
         .catch((error: Error) => {
-            console.error("Error when create user: ", error.message);
+            console.error("Error when create user: ", error);
         });
 };
 
