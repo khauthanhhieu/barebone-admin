@@ -1,4 +1,4 @@
-import "~/styles/admin/style.css";
+import "~/styles/client/style.css";
 
 export default async function ClientLayout({
     children,
