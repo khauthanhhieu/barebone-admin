@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 
@@ -10,9 +10,11 @@ const SignIn: FC = () => {
     const { status } = useSession();
     const { push } = useRouter();
 
-    if (status == "authenticated") {
-        push("/");
-    }
+    useEffect(() => {
+        if (status == "authenticated") {
+            push("/");
+        }
+    }, [status, push]);
 
     const handleLogin = (provider: string) => {
         setLoading(true);
