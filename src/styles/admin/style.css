@@ -1,16 +1,8 @@
+@import "../tailwind.css";
+
 @import url("https://fonts.cdnfonts.com/css/satoshi");
 @import "./data-tables-css.css";
 @import "./satoshi.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* @layer base {
-  body {
- 
-  }
-} */
 
 @layer utilities {
   /* Chrome, Safari and Opera */
