@@ -31,12 +31,15 @@ export const authOptions = {
 
     callbacks: {
         async jwt({ token }: { token: JWT }) {
-            let isAdmin = false;
-            if (token?.email) {
-                const user = await UserService.FindByEmail(token.email);
-                isAdmin = user?.isAdmin ?? false;
+            if (!token.hasOwnProperty("isAdmin")) {
+                let isAdmin = false;
+                if (token?.email) {
+                    const user = await UserService.FindByEmail(token.email);
+                    isAdmin = user?.isAdmin ?? false;
+                }
+                token.isAdmin = isAdmin;
             }
-            token.isAdmin = isAdmin;
+
             return token;
         },
         // async session({ session } : { session: Session }) {
