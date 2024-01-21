@@ -74,6 +74,7 @@ Go to Credentials tab, click Create Credential > OAuth client ID
 
 - OAuth client created: copy **Client ID** and **Client secret**
 ![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/f1975d23-4694-4543-8054-2efffd11b567)
+- Update .env file: set **Client ID** as GOOGLE_ID and **Client secret** as GOOGLE_SECRET
 
 Publish app: go to OAuth consent screen > click Publish app
 
