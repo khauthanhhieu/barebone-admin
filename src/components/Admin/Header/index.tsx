@@ -6,7 +6,7 @@ import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import { MenuIcon } from "lucide-react";
-import { useSidebar } from "~/components/Sidebar/use-sidebar";
+import { useSidebar } from "~/components/Admin/Sidebar/use-sidebar";
 
 const Header = () => {
   const { toggleSidebar, isSidebarOpen } = useSidebar((state) => state);

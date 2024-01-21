@@ -1,13 +1,13 @@
-import Breadcrumb from "~/components/Breadcrumbs/Breadcrumb";
-import CheckboxFive from "~/components/Checkboxes/CheckboxFive";
-import CheckboxFour from "~/components/Checkboxes/CheckboxFour";
-import CheckboxOne from "~/components/Checkboxes/CheckboxOne";
-import CheckboxThree from "~/components/Checkboxes/CheckboxThree";
-import CheckboxTwo from "~/components/Checkboxes/CheckboxTwo";
-import SwitcherFour from "~/components/Switchers/SwitcherFour";
-import SwitcherOne from "~/components/Switchers/SwitcherOne";
-import SwitcherThree from "~/components/Switchers/SwitcherThree";
-import SwitcherTwo from "~/components/Switchers/SwitcherTwo";
+import Breadcrumb from "~/components/Admin/Breadcrumbs/Breadcrumb";
+import CheckboxFive from "~/components/Admin/Checkboxes/CheckboxFive";
+import CheckboxFour from "~/components/Admin/Checkboxes/CheckboxFour";
+import CheckboxOne from "~/components/Admin/Checkboxes/CheckboxOne";
+import CheckboxThree from "~/components/Admin/Checkboxes/CheckboxThree";
+import CheckboxTwo from "~/components/Admin/Checkboxes/CheckboxTwo";
+import SwitcherFour from "~/components/Admin/Switchers/SwitcherFour";
+import SwitcherOne from "~/components/Admin/Switchers/SwitcherOne";
+import SwitcherThree from "~/components/Admin/Switchers/SwitcherThree";
+import SwitcherTwo from "~/components/Admin/Switchers/SwitcherTwo";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {

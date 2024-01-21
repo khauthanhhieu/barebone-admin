@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { AreaChart, SimpleBar } from "~/components/Charts";
+import { AreaChart, SimpleBar } from "~/components/Admin/Charts";
 import ChatCard from "../Chat/ChatCard";
 import TableOne from "../Tables/TableOne";
 

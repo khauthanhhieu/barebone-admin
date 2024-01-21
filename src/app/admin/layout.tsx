@@ -1,5 +1,5 @@
-import Sidebar from "~/components/Sidebar/Sidebar";
-import Header from "~/components/Header";
+import Sidebar from "~/components/Admin/Sidebar/Sidebar";
+import Header from "~/components/Admin/Header";
 import "~/styles/admin/style.css";
 
 export default async function AdminLayout({

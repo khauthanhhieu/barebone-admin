@@ -1,6 +1,6 @@
 "use client";
-import Breadcrumb from "~/components/Breadcrumbs/Breadcrumb";
-import { AreaChart, SimpleBar, SimpleDonut } from "~/components/Charts";
+import Breadcrumb from "~/components/Admin/Breadcrumbs/Breadcrumb";
+import { AreaChart, SimpleBar, SimpleDonut } from "~/components/Admin/Charts";
 
 const Chart = () => {
   return (
