@@ -60,14 +60,18 @@ export const authOptions = {
 
             const success = account.provider == "google" ? profile.email_verified : true;
 
-            const result = await UserService.FindOrCreate({
-                username: `${account.provider}-${account.providerAccountId}`,
-                avatarUrl: typeof profile.picture === 'string' || (profile.picture as any) instanceof String ? profile.picture : null,
-                email: profile.email,
-                name: profile.name
-            } as User);
-
-            return success && result != null;
+            try {
+                const result = await UserService.FindOrCreate({
+                    username: `${account.provider}-${account.providerAccountId}`,
+                    avatarUrl: typeof profile.picture === 'string' || (profile.picture as any) instanceof String ? profile.picture : null,
+                    email: profile.email,
+                    name: profile.name
+                } as User);
+    
+                return success && result != null;
+            } catch (err) {
+                return `/auth/signin?error=${err}`;
+            }
         },
 
         async redirect({ url, baseUrl }: { url: string, baseUrl: string }) {

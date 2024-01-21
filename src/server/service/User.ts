@@ -21,6 +21,8 @@ export const FindOrCreate = async (data: User) => {
         return user;
     } catch (error) {
         console.error("Error when find or create user: ", error);
-        return null;
+        if (error.original.code == "ECONNREFUSED") {
+            throw "ECONNREFUSED";
+        }
     }
 };

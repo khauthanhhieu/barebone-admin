@@ -1,10 +1,20 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignIn: FC = () => {
+    const searchParams = useSearchParams();
+    const error = searchParams.get("error");
+
+    const errMsg = useMemo(() => {
+        if (error == "ECONNREFUSED") {
+            return "Database connection failed !";
+        }
+        return undefined;
+    }, [error]);
+
     const [loading, setLoading] = useState(false);
 
     const { status } = useSession();
@@ -163,6 +173,12 @@ const SignIn: FC = () => {
                             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                                 Sign In to Barebone Admin
                             </h2>
+
+                            {errMsg && (
+                                <p className="p-4 mb-4 max-w-xs text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                                    {errMsg}
+                                </p>
+                            )}
 
                             <button
                                 className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline disabled:opacity-60"
