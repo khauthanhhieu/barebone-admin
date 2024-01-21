@@ -1,31 +1,5 @@
 # ShakibAdimin Next.js - Free Next.js Tailwind Admin Dashboard Template
 
-ShakibAdimin is a free and open-source admin dashboard template built on **Next.js and Tailwind CSS** providing developers with everything they need to create a feature-rich and data-driven: back-end, dashboard, or admin panel solution for any sort of web project.
-
-With ShakibAdimin Next.js, you get access to all the necessary dashboard UI components, elements, and pages required to build a high-quality and complete dashboard or admin panel. Whether you're building a dashboard or admin panel for a complex web application or a simple website.
-
-ShakibAdimin utilizes the powerful features of **Next.js 14** and common features of Next.js such as server-side rendering (SSR), static site generation (SSG), and seamless API route integration. Combined with the advancements of **React 18** and the robustness of **TypeScript**, ShakibAdimin is the perfect solution to help get your project up and running quickly.
-
-nique Dashboards: Analytics, Ecommerce, Marketing, and CRM (More will be added)
-
-- 120+ Dashboard UI Components
-- 200+ Total UI Elements
-- 45+ HTML Files
-- All Essential Elements and Files
-- Full Figma Design Source - As Shown on Demo
-
----
-
-- 1 Unique Dashboard
-- 30+ Dashboard UI Components
-- 50+ Total UI Elements
-- 10+ HTML Files
-- TypeScript Support
-- Basic UI Kit Elements and Files
-- Figma Design Source - Free Sample
-
----
-
 ## Installation
 
 Here are the steps you need to follow to install the dependencies.
@@ -56,18 +30,61 @@ or
 yarn dev
 ```
 
-## Free Admin Dashboard Template for Next.js Built-with Tailwind CSS, React 18 and TypeScript
 
-ShakibAdmin Next.js is a free dashboard template, which uses Tailwind CSS, is a great starting point for dashboard UI. This template uses the Next.js JavaScript framework and the easy-to-use Tailwind CSS framework. The Tailwind CSS and Next.js Dashboard Template comes with ready-made components like navigation menus, charts, tables, and forms. These components can be easily adjusted and added to any Next.js web application.
-
-ShakibAdmin for Next.js provides all essential Next.js + Tailwind CSS UI components that can be copied and pasted directly into your dashboard projects. The range of components includes charts, graphs, navbars, tabs, buttons, cards, tables, profiles, forms, modals, app pages, calendars, web app example templates, and more, all coded for Next.js React and styled using Tailwind CSS.
-
-If you're on the hunt for a top-quality Next.js-Tailwind Dashboard, Admin Panel Template, or UI Kit, ShakibAdmin is the perfect choice for you!
-
-### 📄 License
 
 ShakibAdmin Next.js Free is 100% free and open-source; feel free to use it with your personal and commercial projects.
 
-### 💜 Support
+## Configure social login application
 
-If you like the template, please star this repository to inspire the team to create more stuff like this and reach more users like you!
+### Google
+
+Log in to the Google Cloud Console (https://console.cloud.google.com/) and do the following:
+1. Create a project
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/9faee3c7-fc74-4cf9-8729-3c7e5d8ec743)
+
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/b3adfc87-b20a-4024-810d-fb3f83331070)
+
+2. Setup API
+
+After create project, go to Dashboard and click APIs and Services in Quick access
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/0c0f4628-3381-4f23-ad47-11c5be0852c2)
+
+Go to OAuth consent screen
+- User Type: choose External
+- Setup app information
+  + OAuth consent screen
+     * Required: App name, User support email and Developer contact information
+     * In prodution, we need to input Authorized domains
+  + Scopes: no need to setup
+  + Test users: no need to setup
+
+Go to Credentials tab, click Create Credential > OAuth client ID
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/85e5c6e0-9a01-47d5-bfe5-9f5408db11cc)
+
+- Application type: choose Web application
+- Name: input whatever you want or default value. This name is only used to identify the client in the console and will not be shown to end users.
+
+- Authorized JavaScript origins:
+   + Insert http://localhost:3000 -- can remove in production
+   + Insert http://\<production-domain\>
+- Authorized redirect URIs
+   + Insert http://localhost:3000/api/auth/callback/google -- can remove in production
+   + Insert http://\<production-domain\>/api/auth/callback/google
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/276b5254-032d-4ef3-a4a6-532c4aa9564e)
+
+- OAuth client created: copy **Client ID** and **Client secret**
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/f1975d23-4694-4543-8054-2efffd11b567)
+
+Publish app: go to OAuth consent screen > click Publish app
+
+Pricing
+
+| Monthly Active Users (MAU) | Price per MAU ($)    |
+| :---:   | :---: |
+| 0 - 49,999 | 0   |
+| 50,000 - 99,999 |	0.0055 |
+| 100,000 - 999,999	| 0.0046 |
+| 1,000,000 - 9,999,999 |	0.0032 |
+| 10,000,000 +	| 0.0025 |
+
+Detail: https://cloud.google.com/identity-platform/pricing
