@@ -19,7 +19,7 @@ export const FindOrCreate = async (data: User) => {
         });
 
         return user;
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error when find or create user: ", error);
         if (error.original.code == "ECONNREFUSED") {
             throw "ECONNREFUSED";
