@@ -1,4 +1,4 @@
-# ShakibAdimin Next.js - Free Next.js Tailwind Admin Dashboard Template
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/2095691d-1a42-43ab-9561-5fb9db1c3b1b)# ShakibAdimin Next.js - Free Next.js Tailwind Admin Dashboard Template
 
 ## Installation
 
@@ -89,3 +89,46 @@ Pricing
 | 10,000,000 +	| 0.0025 |
 
 Detail: https://cloud.google.com/identity-platform/pricing
+
+### Facebook
+
+Log in to the Meta for Developers (https://developers.facebook.com/apps) and do the following:
+
+1. Create new app
+
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/5597e95b-bd2b-42d3-bf17-b2b7f71261f5)
+
+- Add use case: Choose Other, click Next
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/7d177222-f355-466e-93fe-ede77e377624)
+
+- Select an app type: choose Consumer
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/7c8d1fe4-dba3-47bd-9345-78d9bc6353db)
+
+- Detail
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/953ab9b4-be09-4ba1-96d5-4073493fc39d)
+
+  + Add an app name: Barebone
+  + App contact email
+ 
+Add products to your app: click Facebook Login > Setup
+![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/462ae970-2105-477d-a9bf-c1b6079c6d1d)
+
+Select the platform for this app: choose Web
+- Add site URL: https://\<production-domain\>/ or http://localhost:3000/
+- Save > Next > Next ...
+
+Go to App Settings > Basic
+
+Copy **App ID** and **App secret**, update .env file: set **App ID** as FACEBOOK_ID and **App secret** as FACEBOOK_SECRET
+
+Setup config in production
+- Facebook Login > Setttings > Valid OAuth Redirect URIs: https://\<YOUR_DOMAIN\>/api/auth/callback/facebook
+
+Publish: Update App Mode to Live.
+To do it, you must provide a valid Privacy Policy URL, Terms of Service URL and other information in order take your app Live.
+Go to Basic Settings and make sure it is valid.
+
+Detail: https://www.youtube.com/watch?v=dxSQuzzihjA
+
+Pricing: free
+
