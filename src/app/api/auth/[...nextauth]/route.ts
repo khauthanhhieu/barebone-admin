@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { UserService } from "~/server/service";
 import { User } from "~/server/models";
-import { JWT } from "next-auth/jwt";
+import CustomJWT from "~/types/custom-jwt";
 
 export const authOptions = {
     providers: [
@@ -31,13 +31,16 @@ export const authOptions = {
     },
 
     callbacks: {
-        async jwt({ token }: { token: JWT }) {
+        async jwt({ token }: { token: CustomJWT }) {
             if (!token.hasOwnProperty("isAdmin")) {
-                let isAdmin = false;
+                let id = undefined, isAdmin = false;
                 if (token?.email) {
                     const user = await UserService.FindByEmail(token.email);
+                    id = user?.id;
                     isAdmin = user?.isAdmin ?? false;
+                    
                 }
+                token.id = id as number;
                 token.isAdmin = isAdmin;
             }
 
