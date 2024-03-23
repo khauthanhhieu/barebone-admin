@@ -1,12 +1,15 @@
-![image](https://github.com/khauthanhhieu/barebone-admin/assets/44426849/2095691d-1a42-43ab-9561-5fb9db1c3b1b)# ShakibAdimin Next.js - Free Next.js Tailwind Admin Dashboard Template
+ShakibAdimin Next.js - Free Next.js Tailwind Admin Dashboard Template
 
 ## Installation
 
 Here are the steps you need to follow to install the dependencies.
 
-1. Download and extract the template from Next.js Templates.
+1. Check environment variables and database config
 
-2. After that **cd** into the template directory then run this command to install all the dependencies
+* Environment: **env**, **.env.development**
+* Database config: **src/server/database/config.json**
+
+3. After that **cd** into the template directory then run this command to install all the dependencies
 
 ```
 npm install
@@ -18,7 +21,18 @@ or
 yarn install
 ```
 
-3. Now run this command to start the developement server
+3. Create. migrate and seed database
+```
+npx sequelize db:drop
+```
+
+```
+npx sequelize db:create
+npx sequelize db:migrate
+npx sequelize db:seed:all
+```
+
+4. Now run this command to start the developement server
 
 ```
 npm run dev
