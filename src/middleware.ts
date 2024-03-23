@@ -1,4 +1,6 @@
-import { withAuth } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
+import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 import { PublicPages } from "~/scripts/enums";
 
 export const config = {
@@ -14,11 +16,24 @@ export const config = {
     ],
 };
 
+const isApiPathname = (pathname: string) => pathname.match(/\/api(?!\/auth\/).*/);
+
 export default withAuth(
-    function middleware(_) { },
+    async function middleware(req: NextRequestWithAuth) {
+        if (isApiPathname(req.nextUrl.pathname)) {
+            const token = await getToken({ req });
+            if (!token) {
+                return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            }
+        }
+    },
     {
         callbacks: {
             authorized: ({ req, token }) => {
+                if (isApiPathname(req.nextUrl.pathname)) {
+                    return true;
+                }
+
                 if (PublicPages.includes(req.nextUrl.pathname)) {
                     return true;
                 }
