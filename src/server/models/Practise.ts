@@ -1,6 +1,5 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, Association, NonAttribute } from 'sequelize';
 import database from "../database";
-import PractiseLog from "./PractiseLog";
 import Word from "./Word";
 
 class Practise extends Model<InferAttributes<Practise>, InferCreationAttributes<Practise>> {
