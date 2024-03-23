@@ -1,31 +1,34 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import {
+    DataTypes, Model, InferAttributes, InferCreationAttributes,
+    CreationOptional, ForeignKey, NonAttribute, Association
+} from 'sequelize';
 import database from "../database";
 import Practise from './Practise';
+import WordDetail from './WordDetail';
 
 class Word extends Model<InferAttributes<Word>, InferCreationAttributes<Word>> {
     declare id: CreationOptional<number>;
-    declare practiseId: CreationOptional<number>;
+    declare practiseId: ForeignKey<Practise['id']>;
 
-    declare order: CreationOptional<number>;
-    declare word: CreationOptional<string>;
-    declare type: CreationOptional<string>;
+    declare order: number;
+    declare word: string;
+    declare type: string;
 
     declare wordFamily: CreationOptional<string>;
 
-    declare createdAt: Date;
-    declare updatedAt: Date;
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+
+    declare practise: NonAttribute<Practise>;
+
+    declare details?: NonAttribute<WordDetail[]>;
+    declare static associations: {
+        details: Association<Word, WordDetail>;
+    };
 }
 
 Word.init(
     {
-        practiseId: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false,
-            references: { model: Practise, key: "id" },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-        },
-
         id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
 
         order: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },

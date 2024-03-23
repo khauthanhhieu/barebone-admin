@@ -31,7 +31,7 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE"
       },
-      createdAt: {
+      time: {
         type: DataTypes.DATE,
         allowNull: false,
       },

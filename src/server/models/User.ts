@@ -1,5 +1,9 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import {
+    DataTypes, Model, InferAttributes, InferCreationAttributes,
+    CreationOptional, Association, NonAttribute
+} from 'sequelize';
 import database from "../database";
+import PractiseLog from './PractiseLog';
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<number>;
@@ -10,6 +14,11 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare isAdmin: boolean;
     declare createdAt: Date;
     declare updatedAt: Date;
+
+    declare words?: NonAttribute<PractiseLog[]>;
+    declare static associations: {
+        projects: Association<User, PractiseLog>;
+    };
 }
 
 User.init(

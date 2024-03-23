@@ -1,5 +1,7 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, Association, NonAttribute } from 'sequelize';
 import database from "../database";
+import PractiseLog from "./PractiseLog";
+import Word from "./Word";
 
 class Practise extends Model<InferAttributes<Practise>, InferCreationAttributes<Practise>> {
     declare id: CreationOptional<number>;
@@ -7,6 +9,11 @@ class Practise extends Model<InferAttributes<Practise>, InferCreationAttributes<
     declare paragraph: CreationOptional<string>;
     declare createdAt: Date;
     declare updatedAt: Date;
+
+    declare words?: NonAttribute<Word[]>;
+    declare static associations: {
+        words: Association<Practise, Word>;
+    };
 }
 
 Practise.init(

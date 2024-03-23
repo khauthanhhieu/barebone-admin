@@ -1,28 +1,26 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import {
+    DataTypes, Model, InferAttributes, InferCreationAttributes,
+    CreationOptional, ForeignKey, NonAttribute
+} from 'sequelize';
 import database from "../database";
 import Word from './Word';
 
 class WordDetail extends Model<InferAttributes<WordDetail>, InferCreationAttributes<WordDetail>> {
-    declare wordId: CreationOptional<number>;
     declare id: CreationOptional<number>;
-    declare order: CreationOptional<number>;
+    declare wordId: ForeignKey<Word['id']>;
 
-    declare definition: CreationOptional<string>;
-    declare example: CreationOptional<string>;
-    declare synonyms: CreationOptional<string>;
-    declare antonyms: CreationOptional<string>;
+    declare order: number;
+
+    declare definition: string | null;
+    declare example: string | null;
+    declare synonyms: string | null;
+    declare antonyms: string | null;
+
+    declare word: NonAttribute<Word>;
 }
 
 WordDetail.init(
     {
-        wordId: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false,
-            references: { model: Word, key: "id" },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE"
-        },
-
         id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
         order: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
 
@@ -33,7 +31,8 @@ WordDetail.init(
     },
     {
         tableName: 'WordDetails',
-        sequelize: database
+        sequelize: database,
+        timestamps: false
     }
 );
 

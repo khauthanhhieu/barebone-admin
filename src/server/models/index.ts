@@ -1,7 +1,48 @@
 // https://sequelize.org/docs/v6/other-topics/migrations/
+// https://sequelize.org/docs/v6/other-topics/typescript/
 
-export { default as User } from "./User";
-export { default as Practise } from "./Practise";
-export { default as Word } from "./Word";
-export { default as WordDetail } from "./WordDetail";
-export { default as PractiseLog } from "./PractiseLog";
+import User from "./User";
+import Practise from "./Practise";
+import Word from "./Word";
+import WordDetail from "./WordDetail";
+import PractiseLog from "./PractiseLog";
+
+Practise.hasMany(PractiseLog, {
+    sourceKey: 'id',
+    foreignKey: 'practiseId',
+    as: 'practiseLogs',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+
+PractiseLog.belongsTo(Practise, {
+    targetKey: "id",
+    foreignKey: "practiseId",
+    as: 'practise',
+});
+
+Practise.hasMany(Word, {
+    sourceKey: 'id',
+    foreignKey: 'practiseId',
+    as: 'words',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+
+User.hasMany(PractiseLog, {
+    sourceKey: 'id',
+    foreignKey: 'userId',
+    as: 'practiseLogs',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+
+Word.hasMany(WordDetail, {
+    sourceKey: 'id',
+    foreignKey: 'wordId',
+    as: 'details',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+
+export { User, Practise, Word, WordDetail, PractiseLog };

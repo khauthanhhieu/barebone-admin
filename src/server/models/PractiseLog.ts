@@ -1,13 +1,20 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import {
+    DataTypes, Model, InferAttributes, InferCreationAttributes,
+    CreationOptional, ForeignKey, NonAttribute
+} from 'sequelize';
 import database from "../database";
 import Practise from './Practise';
 import User from './User';
 
 class PractiseLog extends Model<InferAttributes<PractiseLog>, InferCreationAttributes<PractiseLog>> {
     declare id: CreationOptional<number>;
-    declare practiseId: CreationOptional<number>;
-    declare userId: CreationOptional<number>;
-    declare createdAt: Date;
+    declare practiseId: ForeignKey<Practise['id']>;
+    declare userId: ForeignKey<User['id']>;
+
+    declare time: Date;
+
+    declare practise: NonAttribute<Practise>;
+    declare user: NonAttribute<User>;
 }
 
 PractiseLog.init(
@@ -17,28 +24,17 @@ PractiseLog.init(
             autoIncrement: true,
             primaryKey: true
         },
-        practiseId: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false,
-            references: { model: Practise, key: "id" },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE"
-        },
-        userId: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false,
-            references: { model: User, key: "id" },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE"
-        },
-        createdAt: {
+        time: {
             type: DataTypes.DATE,
             allowNull: false,
         },
     },
     {
         tableName: 'PractiseLogs',
-        sequelize: database
+        sequelize: database,
+        timestamps: true,
+        updatedAt: false,
+        createdAt: "time",
     }
 );
 
