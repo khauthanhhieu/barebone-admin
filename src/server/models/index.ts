@@ -4,13 +4,17 @@
 import User from "./User";
 import Practise from "./Practise";
 import Word from "./Word";
+import PractiseWord from "./PractiseWord";
 import WordDetail from "./WordDetail";
 import PractiseLog from "./PractiseLog";
 
 Practise.hasMany(PractiseLog, {
-    sourceKey: 'id',
-    foreignKey: 'practiseId',
-    as: 'practiseLogs',
+    sourceKey: "id",
+    foreignKey: {
+        field: "practiseId",
+        // allowNull: false
+    },
+    as: "practiseLogs",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });
@@ -18,31 +22,47 @@ Practise.hasMany(PractiseLog, {
 PractiseLog.belongsTo(Practise, {
     targetKey: "id",
     foreignKey: "practiseId",
-    as: 'practise',
+    as: "practise",
 });
 
-Practise.hasMany(Word, {
-    sourceKey: 'id',
-    foreignKey: 'practiseId',
-    as: 'words',
+User.hasMany(PractiseLog, {
+    sourceKey: "id",
+    foreignKey: {
+        field: "userId",
+        // allowNull: false
+    },
+    as: "practiseLogs",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });
 
-User.hasMany(PractiseLog, {
-    sourceKey: 'id',
-    foreignKey: 'userId',
-    as: 'practiseLogs',
+PractiseLog.belongsTo(User, {
+    targetKey: "id",
+    foreignKey: "userId",
+    as: "user",
+});
+
+Practise.belongsToMany(Word, {
+    through: PractiseWord,
+    foreignKey: "practiseId",
+    as: "words",
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+
+Word.belongsToMany(Practise, {
+    through: PractiseWord,
+    foreignKey: "wordId",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });
 
 Word.hasMany(WordDetail, {
-    sourceKey: 'id',
-    foreignKey: 'wordId',
-    as: 'details',
+    sourceKey: "id",
+    foreignKey: "wordId",
+    as: "details",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });
 
-export { User, Practise, Word, WordDetail, PractiseLog };
+export { User, Practise, Word, WordDetail, PractiseLog, PractiseWord };

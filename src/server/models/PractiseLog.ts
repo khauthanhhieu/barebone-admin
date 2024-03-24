@@ -1,6 +1,6 @@
 import {
     DataTypes, Model, InferAttributes, InferCreationAttributes,
-    CreationOptional, ForeignKey, NonAttribute
+    ForeignKey, CreationOptional, NonAttribute
 } from 'sequelize';
 import database from "../database";
 import Practise from './Practise';
@@ -10,24 +10,15 @@ class PractiseLog extends Model<InferAttributes<PractiseLog>, InferCreationAttri
     declare id: CreationOptional<number>;
     declare practiseId: ForeignKey<Practise['id']>;
     declare userId: ForeignKey<User['id']>;
-
     declare time: Date;
 
     declare practise: NonAttribute<Practise>;
-    declare user: NonAttribute<User>;
 }
 
 PractiseLog.init(
     {
-        id: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        time: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
+        id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+        time: { type: DataTypes.DATE, allowNull: false },
     },
     {
         tableName: 'PractiseLogs',
@@ -37,5 +28,7 @@ PractiseLog.init(
         createdAt: "time",
     }
 );
+
+PractiseLog.removeAttribute('id');
 
 export default PractiseLog;

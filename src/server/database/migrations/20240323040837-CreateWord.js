@@ -18,14 +18,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      practiseId: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: { model: "practises", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-      },
-      order: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
       word: { type: DataTypes.TEXT, allowNull: false, validate: { notEmpty: true } },
       type: { type: DataTypes.TEXT, allowNull: false, validate: { notEmpty: true } },
 

@@ -1,6 +1,6 @@
 import {
     DataTypes, Model, InferAttributes, InferCreationAttributes,
-    CreationOptional, ForeignKey, NonAttribute, Association
+    CreationOptional, NonAttribute, Association
 } from 'sequelize';
 import database from "../database";
 import Practise from './Practise';
@@ -8,9 +8,7 @@ import WordDetail from './WordDetail';
 
 class Word extends Model<InferAttributes<Word>, InferCreationAttributes<Word>> {
     declare id: CreationOptional<number>;
-    declare practiseId: ForeignKey<Practise['id']>;
 
-    declare order: number;
     declare word: string;
     declare type: string;
 
@@ -18,8 +16,6 @@ class Word extends Model<InferAttributes<Word>, InferCreationAttributes<Word>> {
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
-
-    declare practise: NonAttribute<Practise>;
 
     declare details?: NonAttribute<WordDetail[]>;
     declare static associations: {
@@ -31,7 +27,6 @@ Word.init(
     {
         id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
 
-        order: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
         word: { type: DataTypes.TEXT, allowNull: false, validate: { notEmpty: true } },
         type: { type: DataTypes.TEXT, allowNull: false, validate: { notEmpty: true } },
 

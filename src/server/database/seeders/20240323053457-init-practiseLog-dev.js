@@ -15,11 +15,10 @@ module.exports = {
 
     await queryInterface.bulkInsert('practiseLogs', [{
       id: 1,
-      
       practiseId: 1,
       userId: 1,
 
-      createdAt: "2024-03-23 04:49:49",
+      time: "2024-03-23 04:49:49",
     }], {});
   },
 
