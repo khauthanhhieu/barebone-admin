@@ -21,7 +21,7 @@ or
 yarn install
 ```
 
-3. Create. migrate and seed database
+4. Create. migrate and seed database
 ```
 npx sequelize db:drop
 ```
@@ -32,7 +32,7 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 ```
 
-4. Now run this command to start the developement server
+5. Now run this command to start the developement server
 
 ```
 npm run dev
