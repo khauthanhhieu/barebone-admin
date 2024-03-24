@@ -1,5 +1,5 @@
 import { PractiseLog } from "../models";
-import WordViewModel, { getWordViewModel } from "./WordViewModel";
+import WordViewModel, { WordTreeListModel, getWordViewModel } from "./WordViewModel";
 
 type PractiseLogViewModel = {
     id: number,
@@ -7,7 +7,7 @@ type PractiseLogViewModel = {
     practiseId: number,
     title: string,
     paragraph: string,
-    words: WordViewModel[]
+    words: WordTreeListModel[] | string[][][]
 }
 
 export function getPractiseLogViewModel(input: PractiseLog) {
@@ -17,7 +17,7 @@ export function getPractiseLogViewModel(input: PractiseLog) {
         practiseId: input.practise.id,
         title: input.practise.title,
         paragraph: input.practise.paragraph,
-        words: input.practise.words?.map(getWordViewModel)
+        // words: input.practise.words?.map(getWordViewModel)
     } as PractiseLogViewModel;
 }
 

@@ -28,6 +28,21 @@ module.exports = {
         practiseId: 1,
         wordId: 3,
         order: 2
+      },
+      {
+        practiseId: 2,
+        wordId: 3,
+        order: 2
+      },
+      {
+        practiseId: 2,
+        wordId: 2,
+        order: 3
+      },
+      {
+        practiseId: 2,
+        wordId: 5,
+        order: 1
       }
     ], {});
   },

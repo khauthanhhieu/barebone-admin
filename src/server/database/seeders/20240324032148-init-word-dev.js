@@ -97,6 +97,30 @@ const words = [
     createdAt: "2024-03-24 10:28:49",
     updatedAt: "2024-03-24 10:28:49"
   },
+  {
+    id: 5,
+    word: "basis",
+    type: "noun [countable]",
+    wordFamily: "(noun) base the basics basis (adjective) baseless basic based (verb) base (adverb) basically",
+
+    definition: "[countable] the facts, ideas, or things from which something can be developed",
+    example: "Their claim had no basis in fact  (=it was not true).;Bread forms the basis of their daily diet.;The video will provide a basis for class discussion.",
+    synonyms: null,
+    antonyms: null,
+
+    definition2: "[singular] the way that something happens, or the way that something is organized or done",
+    example2: "I’m saving money on a regular basis.;Board meetings are held on a weekly basis.;Nurses are employed on a full-time basis.",
+    synonyms2: null,
+    antonyms2: null,
+
+    definition3: null,
+    example3: null,
+    synonyms3: null,
+    antonyms3: null,
+
+    createdAt: "2024-03-24 17:28:49",
+    updatedAt: "2024-03-24 17:28:49"
+  }
 ];
 
 /** @type {import('sequelize-cli').Migration} */

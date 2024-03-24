@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import CustomJWT from "~/types/custom-jwt";
 import { PractiseLogService as service, WordService } from "~/server/service";
 import { PractiseLog } from "~/server/models";
+import WordViewModel from "~/server/viewModels/WordViewModel";
 
 enum DataType {
     LOGS = "logs",
@@ -23,28 +24,28 @@ export async function GET(request: NextRequest) {
 
         let data = null;
 
+        let formatWords: Function;
+        switch (displayFormat) {
+            case WordDisplayFormat.GRID: {
+                formatWords = WordService.GetWordGridViewData;
+                break;
+            }
+            case WordDisplayFormat.TREE_LIST: {
+                formatWords = WordService.GetWordTreeListViewData;
+                break;
+            }
+            default: {
+                formatWords = (words: WordViewModel[]) => words;
+            }
+        }
+
         switch(dataType) {
             case DataType.LOGS: {
-                data = await service.GetLogByUserAndFiter(token.id);
+                data = await service.GetLogByUserAndFiter(token.id, formatWords);
                 break;
             }
             case DataType.WORDS: {
-                const words = await service.GetLogWordByUserAndFiter(token.id);
-
-                switch (displayFormat) {
-                    case WordDisplayFormat.GRID: {
-                        data = WordService.getWordGridViewData(words);
-                        break;
-                    }
-                    case WordDisplayFormat.TREE_LIST: {
-                        data = WordService.getWordTreeListViewData(words);
-                        break;
-                    }
-                    default: {
-                        data = words;
-                    }
-                }
-
+                data = await service.GetLogWordByUserAndFiter(token.id, formatWords);
                 break;
             }
         }

@@ -22,6 +22,14 @@ module.exports = {
       createdAt: "2024-03-23 04:49:49",
       updatedAt: "2024-03-23 04:49:49"
     }], {});
+
+    await queryInterface.bulkInsert('practises', [{
+      id: 2,
+      title: "Basis of Design",
+      paragraph: "The Basis of Design (BOD) documents the principles, assumptions, rationale, criteria, and considerations used for calculations and decisions required during design. The BOD is developed by the Designer and builds upon the PC and OPR.",
+      createdAt: "2024-03-24 16:49:49",
+      updatedAt: "2024-03-24 16:49:49"
+    }], {});
   },
 
   async down(queryInterface, Sequelize) {

@@ -1,3 +1,5 @@
+import { Op } from "sequelize";
+import { Practise, PractiseLog, Word, WordDetail } from "../models";
 import WordViewModel, { WordTreeListModel } from "../viewModels/WordViewModel";
 
 const GRID_COLUMNS = [
@@ -71,7 +73,36 @@ const GRID_COLUMNS = [
     },
 ];
 
-export function getWordGridViewData(words: WordViewModel[]) {
+export async function GetWordByPractiseId(practiseId: number) {
+    return await Word.findAll({
+        attributes: ["id", "word", "type", "wordFamily"],
+        where: {
+            '$practises->practiseLogs.practiseId$': { [Op.eq]: practiseId }
+        },
+        include: [
+            {
+                model: WordDetail,
+                as: "details",
+                attributes: ["definition", "example", "synonyms", "antonyms"],
+                order: [["order", "asc"]],
+                limit: 3
+            },
+            {
+                model: Practise,
+                as: "practises",
+                attributes: ["id", "title", "paragraph"],
+                include: [
+                    {
+                        model: PractiseLog,
+                        as: "practiseLogs"
+                    }
+                ]
+            }
+        ],
+    });
+}
+
+export function GetWordGridViewData(words: WordViewModel[]) {
     const result = [];
 
     result.push([ GRID_COLUMNS.map(col => col.title) ]);
@@ -88,7 +119,7 @@ export function getWordGridViewData(words: WordViewModel[]) {
     return result;
 };
 
-export function getWordTreeListViewData(models: WordViewModel[]) {
+export function GetWordTreeListViewData(models: WordViewModel[]) {
     const result = {} as WordTreeListModel;
 
     models.forEach(model => {

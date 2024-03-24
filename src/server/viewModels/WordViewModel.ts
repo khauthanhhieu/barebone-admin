@@ -60,7 +60,7 @@ export interface WordTreeListModel {
 // }
 
 export function getWordViewModel(input: Word, index: number) {
-    const details = input.details as WordDetail[];
+    const details = (input.details || []) as WordDetail[];
 
     return {
         no: index + 1,
