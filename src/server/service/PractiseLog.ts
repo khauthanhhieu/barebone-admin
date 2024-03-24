@@ -8,9 +8,30 @@ export const CreateLog = async (log: PractiseLog) => {
     return await PractiseLog.create(log);
 };
 
-export const GetLogByUserAndFiter = async (userId: number, formatWords: Function) => {
+type FilterParams = {
+    from: Date | null,
+    to: Date | null,
+    keyword: string | null
+}
+
+export const GetLogByUserAndFiter = async (userId: number, formatWords: Function, filter: FilterParams) => {
+    const whereOption = { userId } as any;
+
+    if (filter.from || filter.to) {
+        whereOption.time = {
+            ...(filter.from && { [Op.gte]: filter.from }),
+            ...(filter.to && { [Op.lte]: filter.to }),
+        };
+    }
+
+    if (filter.keyword) {
+        whereOption["$practise.title$"] = {
+            [Op.like]: `%${filter.keyword}%`
+        };
+    }
+
     const logs = await PractiseLog.findAll({
-        where: { userId },
+        where: whereOption,
         attributes: ["id", "time"],
         order: [
             ["time", "desc"],
@@ -47,12 +68,25 @@ export const GetLogByUserAndFiter = async (userId: number, formatWords: Function
     return logViewModels;
 };
 
-export const GetLogWordByUserAndFiter = async (userId: number, formatWords: Function) => {
+export const GetLogWordByUserAndFiter = async (userId: number, formatWords: Function, filter: FilterParams) => {
+    const whereOption = { '$practises->practiseLogs.userId$': { [Op.eq]: userId } } as any;
+
+    if (filter.from || filter.to) {
+        whereOption["$practises->practiseLogs.time$"] = {
+            ...(filter.from && { [Op.gte]: filter.from }),
+            ...(filter.to && { [Op.lte]: filter.to }),
+        };
+    }
+
+    if (filter.keyword) {
+        whereOption.word = {
+            [Op.like]: `%${filter.keyword}%`,
+        };
+    }
+
     const words = await Word.findAll({
         attributes: ["id", "word", "type", "wordFamily"],
-        where: {
-            '$practises->practiseLogs.userId$': { [Op.eq]: userId }
-        },
+        where: whereOption,
         include: [
             {
                 model: WordDetail,
@@ -68,7 +102,7 @@ export const GetLogWordByUserAndFiter = async (userId: number, formatWords: Func
                 include: [
                     {
                         model: PractiseLog,
-                        as: "practiseLogs"
+                        as: "practiseLogs",
                     }
                 ]
             }

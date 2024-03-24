@@ -15,12 +15,27 @@ enum WordDisplayFormat {
     TREE_LIST = "treeList"
 }
 
+type FilterParams = {
+    from: Date | null,
+    to: Date | null,
+    keyword: string | null
+}
+
 export async function GET(request: NextRequest) {
     try {
         const token = await getToken({ req: request }) as CustomJWT;
 
         const dataType = request.nextUrl.searchParams.get("dataType") as DataType;
         const displayFormat = request.nextUrl.searchParams.get("displayFormat") as WordDisplayFormat;
+
+        const from = request.nextUrl.searchParams.get("from");
+        const to = request.nextUrl.searchParams.get("to");
+
+        const fromTime = from ? new Date(from) : null;
+        const toTime = to ? new Date(to) : null;
+        const keyword = request.nextUrl.searchParams.get("keyword");
+
+        const filter = { from: fromTime, to: toTime, keyword } as FilterParams;
 
         let data = null;
 
@@ -41,11 +56,11 @@ export async function GET(request: NextRequest) {
 
         switch(dataType) {
             case DataType.LOGS: {
-                data = await service.GetLogByUserAndFiter(token.id, formatWords);
+                data = await service.GetLogByUserAndFiter(token.id, formatWords, filter);
                 break;
             }
             case DataType.WORDS: {
-                data = await service.GetLogWordByUserAndFiter(token.id, formatWords);
+                data = await service.GetLogWordByUserAndFiter(token.id, formatWords, filter);
                 break;
             }
         }
