@@ -1,9 +1,9 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import CustomJWT from "~/types/custom-jwt";
-import { PractiseLogService as service, WordService } from "~/server/service";
-import { PractiseLog } from "~/server/models";
-import WordViewModel from "~/server/viewModels/WordViewModel";
+import { PractiseLogService as service, WordService } from "~/DAL/service";
+import { PractiseLog } from "~/DAL/models";
+import WordViewModel from "~/DAL/viewModels/WordViewModel";
 
 enum DataType {
     LOGS = "logs",

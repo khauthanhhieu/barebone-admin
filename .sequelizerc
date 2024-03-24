@@ -2,9 +2,9 @@
 const path = require('path');
 
 module.exports = {
-  config: path.resolve('src/server/database', 'config.json'),
-  'models-path': path.resolve('src/server', 'models'),
-  'seeders-path': path.resolve('src/server/database', 'seeders'),
-  'migrations-path': path.resolve('src/server/database', 'migrations'),
-  'seeders-path': path.resolve('src/server/database', 'seeders')
+  config: path.resolve('src/DAL/database', 'config.json'),
+  'models-path': path.resolve('src/DAL', 'models'),
+  'seeders-path': path.resolve('src/DAL/database', 'seeders'),
+  'migrations-path': path.resolve('src/DAL/database', 'migrations'),
+  'seeders-path': path.resolve('src/DAL/database', 'seeders')
 };

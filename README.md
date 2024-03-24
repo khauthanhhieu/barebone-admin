@@ -7,7 +7,7 @@ Here are the steps you need to follow to install the dependencies.
 1. Check environment variables and database config
 
 * Environment: **env**, **.env.development**
-* Database config: **src/server/database/config.json**
+* Database config: **src/DAL/database/config.json**
 
 3. After that **cd** into the template directory then run this command to install all the dependencies
 

@@ -2,8 +2,8 @@ import type { Account, Profile } from "next-auth";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { UserService } from "~/server/service";
-import { User } from "~/server/models";
+import { UserService } from "~/DAL/service";
+import { User } from "~/DAL/models";
 import CustomJWT from "~/types/custom-jwt";
 
 export const authOptions = {
