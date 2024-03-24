@@ -1,11 +1,14 @@
-import { PractiseLog, Practise, PractiseWord, User, Word, WordDetail } from "../models";
+import { PractiseLog, Practise, Word, WordDetail } from "../models";
+import { Op } from "sequelize";
+import { getWordViewModel } from "../viewModels/WordViewModel";
+import { getPractiseLogViewModel } from "../viewModels/PractiseLogViewModel";
 
 export const CreateLog = async (log: PractiseLog) => {
     await PractiseLog.create(log);
 };
 
 export const GetLogByUserAndFiter = async (userId: number) => {
-    return await PractiseLog.findAll({
+    const logs = await PractiseLog.findAll({
         where: { userId },
         attributes: ["id", "time"],
         order: [
@@ -31,4 +34,37 @@ export const GetLogByUserAndFiter = async (userId: number) => {
             }]
         }
     });
+
+    return logs.map(getPractiseLogViewModel);
+};
+
+export const GetLogWordByUserAndFiter = async (userId: number) => {
+    const words = await Word.findAll({
+        attributes: ["id", "word", "type", "wordFamily"],
+        where: {
+            '$practises->practiseLogs.userId$': { [Op.eq]: userId }
+        },
+        include: [
+            {
+                model: WordDetail,
+                as: "details",
+                attributes: ["definition", "example", "synonyms", "antonyms"],
+                order: [["order", "asc"]],
+                limit: 3
+            },
+            {
+                model: Practise,
+                as: "practises",
+                attributes: ["id", "title", "paragraph"],
+                include: [
+                    {
+                        model: PractiseLog,
+                        as: "practiseLogs"
+                    }
+                ]
+            }
+        ],
+    });
+
+    return words.map(getWordViewModel);
 };

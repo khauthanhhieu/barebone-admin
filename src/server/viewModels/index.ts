@@ -1,1 +1,1 @@
-export type { default as PractiseLogViewModel } from "./PractiseLog";
+export type { default as PractiseLogViewModel } from "./PractiseLogViewModel";

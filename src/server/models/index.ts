@@ -53,6 +53,7 @@ Practise.belongsToMany(Word, {
 Word.belongsToMany(Practise, {
     through: PractiseWord,
     foreignKey: "wordId",
+    as: "practises",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });
