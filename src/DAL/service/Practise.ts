@@ -4,6 +4,13 @@ export async function Create(data: Practise) {
     return await Practise.create(data);
 };
 
+export async function Update(data: Practise) {
+    const { id, ...values } = data;
+
+    const model = await Practise.findByPk(id);
+    return model?.update(values);
+};
+
 export async function SetWords(practiseId: number, wordIds: number[]) {
     const models = wordIds.map((wordId, index) => ({
         practiseId,
