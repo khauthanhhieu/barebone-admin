@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { CreateOptions, Op } from "sequelize";
 import { Practise, PractiseLog, Word, WordDetail } from "../models";
 import WordViewModel, { WordTreeListModel } from "../viewModels/WordViewModel";
 
@@ -72,6 +72,10 @@ const GRID_COLUMNS = [
         field: "wordFamily",
     },
 ];
+
+export async function Create(data: Word, option: CreateOptions) {
+    return await Word.create(data, option);
+}
 
 export async function GetWordByPractiseId(practiseId: number) {
     return await Word.findAll({

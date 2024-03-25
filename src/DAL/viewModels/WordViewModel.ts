@@ -1,7 +1,6 @@
 import { Word, WordDetail } from "../models";
 
-interface WordViewModel {
-    no: number,
+export interface WordCreateViewModel {
     type: string,
     word: string,
 
@@ -21,6 +20,10 @@ interface WordViewModel {
     antonyms3: string | null,
 
     wordFamily: string | null,
+}
+
+interface WordViewModel extends WordCreateViewModel {
+    no: number
 }
 
 export interface WordTreeListModel {
