@@ -8,7 +8,7 @@ export async function Update(data: Practise) {
     const { id, ...values } = data;
 
     const model = await Practise.findByPk(id);
-    return model?.update(values);
+    return await model?.update(values);
 };
 
 export async function SetWords(practiseId: number, wordIds: number[]) {

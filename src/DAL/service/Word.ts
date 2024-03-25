@@ -77,6 +77,20 @@ export async function Create(data: Word, option: CreateOptions) {
     return await Word.create(data, option);
 }
 
+export async function Update(data: Word) {
+    const { id, details, ...values } = data;
+
+    const model = await Word.findByPk(id);
+
+    const updatedModel = await model?.update(values);
+    if (updatedModel) {
+        await WordDetail.destroy({ where: { wordId: id } });
+        updatedModel.details = await WordDetail.bulkCreate(details as WordDetail[]);;
+    }
+
+    return updatedModel;
+}
+
 export async function GetWordByPractiseId(practiseId: number) {
     return await Word.findAll({
         attributes: ["id", "word", "type", "wordFamily"],

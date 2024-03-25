@@ -22,6 +22,10 @@ export interface WordCreateViewModel {
     wordFamily: string | null,
 }
 
+export interface WordUpdateViewModel extends WordCreateViewModel {
+    id: number | undefined
+}
+
 interface WordViewModel extends WordCreateViewModel {
     no: number
 }
