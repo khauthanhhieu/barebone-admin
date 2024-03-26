@@ -1,10 +1,11 @@
-import { WordCreateViewModel } from "./WordViewModel";
+import { WordCreateViewModel, WordUpdateViewModel } from "./WordViewModel";
 
 export interface PractiseViewModel {
+    id: number | undefined,
     title: string,
     paragraph: string
 
-    words: WordCreateViewModel[]
+    words: WordCreateViewModel[] | WordUpdateViewModel[]
 }
 
 export default PractiseViewModel;

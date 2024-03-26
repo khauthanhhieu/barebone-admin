@@ -90,10 +90,26 @@ export async function Update(data: Word) {
     const updatedModel = await model?.update(values);
     if (updatedModel) {
         await WordDetail.destroy({ where: { wordId: id } });
+
+        details?.forEach(detail => detail.wordId = id);
         updatedModel.details = await WordDetail.bulkCreate(details as WordDetail[]);;
     }
 
     return updatedModel;
+}
+
+export async function UpdateFromViewModels(viewModels: WordCreateViewModel[]) {
+    const models = viewModels.map(getWordFromViewModel);
+    
+    const promises = models.map(model => {
+        if (model.id) {
+            return Update(model);
+        } else {
+            return Create(model, { include: { model: WordDetail, as: "details" } });
+        }
+    });
+
+    return await Promise.all(promises);
 }
 
 export async function GetWordByPractiseId(practiseId: number) {

@@ -31,16 +31,21 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
     try {
-        const data = await request.json() as Practise;
+        const data = await request.json();
         const paramId = request.nextUrl.searchParams.get("id");
-        const includesWords = request.nextUrl.searchParams.get("includesWords");
-
+        const includesWords = Boolean(request.nextUrl.searchParams.get("includesWords"));
     
         if (!data.id) {
             data.id = Number(paramId);
         }
 
-        const model = await service.Update(data as Practise);
+        let model = null;
+        if (includesWords) {
+            model = await service.UpdateIncludesWords(data as PractiseViewModel);
+        } else {
+            model = await service.Update(data as Practise);
+        }
+
         return NextResponse.json({ success: true, data: model });
     } catch (e) {
         console.error(e);

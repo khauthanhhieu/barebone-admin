@@ -1,6 +1,7 @@
 import { Practise, PractiseWord, Word } from "../models";
 import { WordService } from ".";
 import PractiseViewModel from "../viewModels/PractiseViewModel";
+import { UpdateFromViewModels } from "./Word";
 
 export async function Create(data: Practise) {
     return await Practise.create(data);
@@ -17,7 +18,7 @@ export async function CreateIncludesWord(data: PractiseViewModel) {
     await SetWords(model.id, wordModels.map(model => model.id));
 
     // TODO: need to convert true JSON
-    return { ...model, word: wordModels };
+    return { ...model, words: wordModels };
 };
 
 export async function Update(data: Practise) {
@@ -26,6 +27,28 @@ export async function Update(data: Practise) {
     const model = await Practise.findByPk(id);
     return await model?.update(values);
 };
+
+export async function UpdateIncludesWords(data: PractiseViewModel) {
+    const { id, words, ...values } = data;
+
+    const model = await Practise.findByPk(id);
+
+    if (model) {
+        const [newModel, newWordModels] = await Promise.all([
+            model.update(values),
+            UpdateFromViewModels(words)
+        ]);
+    
+        await SetWords(
+            newModel.id,
+            newWordModels.filter(model => model != undefined).map(model => (model as Word).id)
+        );
+
+        return { ...newModel, words: newWordModels };
+    }
+
+    return null;
+}
 
 export async function SetWords(practiseId: number, wordIds: number[]) {
     const models = wordIds.map((wordId, index) => ({

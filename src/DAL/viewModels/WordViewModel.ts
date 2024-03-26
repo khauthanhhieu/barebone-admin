@@ -93,7 +93,7 @@ export function getWordViewModel(input: Word, index: number) {
     } as WordViewModel;
 }
 
-export function getWordFromViewModel(viewModel: WordCreateViewModel) {
+export function getWordFromViewModel(viewModel: WordCreateViewModel | WordUpdateViewModel) {
     const details = [] as WordDetail[];
 
     if (viewModel.definition || viewModel.example || viewModel.antonyms || viewModel.synonyms) {
@@ -126,12 +126,18 @@ export function getWordFromViewModel(viewModel: WordCreateViewModel) {
         } as WordDetail);
     }
 
-    return {
+    const result = {
         word: viewModel.word,
         type: viewModel.type,
         wordFamily: viewModel.wordFamily,
         details
     } as Word;
+
+    if ("id" in viewModel) {
+        result.id = viewModel.id as number;
+    }
+
+    return result;
 }
 
 export default WordViewModel;
