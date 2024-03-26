@@ -1,6 +1,6 @@
 import { CreateOptions, Op } from "sequelize";
 import { Practise, PractiseLog, Word, WordDetail } from "../models";
-import WordViewModel, { WordTreeListModel } from "../viewModels/WordViewModel";
+import WordViewModel, { WordCreateViewModel, WordTreeListModel, getWordFromViewModel } from "../viewModels/WordViewModel";
 
 const GRID_COLUMNS = [
     {
@@ -32,7 +32,7 @@ const GRID_COLUMNS = [
         title: "ANTONYMS",
         field: "antonyms",
     },
-    
+
     {
         title: "DEFINITION2",
         field: "definition2",
@@ -75,6 +75,11 @@ const GRID_COLUMNS = [
 
 export async function Create(data: Word, option: CreateOptions) {
     return await Word.create(data, option);
+}
+
+export async function CreateFromViewModels(viewModels: WordCreateViewModel[]) {
+    const models = viewModels.map(getWordFromViewModel);
+    return await Word.bulkCreate(models, { include: { model: WordDetail, as: "details" } });
 }
 
 export async function Update(data: Word) {
@@ -123,7 +128,7 @@ export async function GetWordByPractiseId(practiseId: number) {
 export function GetWordGridViewData(words: WordViewModel[]) {
     const result = [];
 
-    result.push([ GRID_COLUMNS.map(col => col.title) ]);
+    result.push([GRID_COLUMNS.map(col => col.title)]);
 
     words.forEach(word => {
         const values = [] as (string | number)[];
@@ -141,7 +146,7 @@ export function GetWordTreeListViewData(models: WordViewModel[]) {
     const result = {} as WordTreeListModel;
 
     models.forEach(model => {
-        if (!result[model.word]) {   
+        if (!result[model.word]) {
             result[model.word] = [] as WordViewModel[];
         }
         result[model.word].push(model);
