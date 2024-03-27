@@ -1,5 +1,5 @@
-import { Practise, PractiseWord, Word } from "../models";
-import { WordService } from ".";
+import { Practise, PractiseLog, PractiseWord, Word } from "../models";
+import { WordService, PractiseLogService } from ".";
 import PractiseViewModel from "../viewModels/PractiseViewModel";
 import { UpdateFromViewModels } from "./Word";
 
@@ -7,7 +7,7 @@ export async function Create(data: Practise) {
     return await Practise.create(data);
 };
 
-export async function CreateIncludesWord(data: PractiseViewModel) {
+export async function CreateIncludesWord(data: PractiseViewModel, userId: number) {
     const { words, ...practise } = data;
 
     const [ model, wordModels ] = await Promise.all([
@@ -16,6 +16,7 @@ export async function CreateIncludesWord(data: PractiseViewModel) {
     ]);
 
     await SetWords(model.id, wordModels.map(model => model.id));
+    await PractiseLogService.CreateLog({ userId, practiseId: model.id, time: new Date() } as PractiseLog);
 
     // TODO: need to convert true JSON
     return { ...model, words: wordModels };

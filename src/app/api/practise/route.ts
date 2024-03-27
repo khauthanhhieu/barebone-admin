@@ -1,7 +1,9 @@
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import { Practise } from "~/DAL/models";
 import { PractiseService as service } from "~/DAL/service";
 import PractiseViewModel from "~/DAL/viewModels/PractiseViewModel";
+import CustomJWT from "~/types/custom-jwt";
 
 type Payload = {
     title: string;
@@ -17,7 +19,8 @@ export async function POST(request: NextRequest) {
         const includesWords = Boolean(request.nextUrl.searchParams.get("includesWords"));
 
         if (includesWords) {
-            model = await service.CreateIncludesWord(data as PractiseViewModel);
+            const token = await getToken({ req: request }) as CustomJWT;
+            model = await service.CreateIncludesWord(data as PractiseViewModel, token.id);
         } else {
             model = await service.Create(data as Practise);
         }
@@ -41,6 +44,7 @@ export async function PUT(request: NextRequest) {
 
         let model = null;
         if (includesWords) {
+            const token = await getToken({ req: request }) as CustomJWT;
             model = await service.UpdateIncludesWords(data as PractiseViewModel);
         } else {
             model = await service.Update(data as Practise);
